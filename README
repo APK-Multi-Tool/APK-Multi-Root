@@ -1,0 +1,10 @@
+APK Multi-ROOT is a application that was written based off of the zerg exploit and built off of the 1 click exploit script as a base.
+
+The Key Features of this application:
+Rooting your Motorola Devices:
+Tested using the Motorola Droid Bionic and the Samsung Sapphire
+This application will also install Busybox superuser su and also Titianum Backup
+also optional is that this application will also add 43V3R Root as well as the Bionic Boot strapper to allow you to boot into a custom recovery
+This should work on most Motorola Devices as well as some other Android Phones
+
+I currently have the system.img of the Bionic 5.5.886 but I have not built it into the script yet since I am hoping to pull or if someone can suppy me with the system.img of the Bionic 5.5.893

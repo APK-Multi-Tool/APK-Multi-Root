@@ -1,0 +1,7 @@
+* Apk Multi-Root       v1.0                                                          *
+* Wget                 v1.13.4                                                       *
+* ADB                  REV 10                                                        *
+* BusyBox              v1.19.3-Stericson                                             *
+* Su Binary            v3.0.3.2                                                      *
+* Superuser            v3.0.7(41)                                                    *
+* Android Debug Bridge v1.0.29                                                       *
