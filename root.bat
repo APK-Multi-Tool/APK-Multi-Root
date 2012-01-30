@@ -78,12 +78,12 @@ ECHO *                         APK Multi-Root tools Stuff                       
 ECHO *                                                                                 *
 ECHO ***********************************************************************************
 ECHO *                                                                                 *
-ECHO * 1. Motorola root script                                                         *
+ECHO * 1. APK Multi-Root script                                                        *
 ECHO *    This should work on most motorola phones                                     *
 ECHO *                                                                                 *
 ECHO ***********************************************************************************
 ECHO *                                                                                 *
-ECHO * 2. 43V3RRoot a Rooted Bionic and Bionic Bootstrap                               *
+ECHO * 2. 43V3RRoot a Rooted Bionic and install Bionic Bootstrap                       *
 ECHO *    This takes a 'rooted' Bionic and installs the 43V3R Root hack                *
 ECHO *    This takes a 'rooted' Bionic and installs the Bionic Bootstrap               *
 ECHO *    This been tested on Bionics 5.5.886 and 5.5.893 rev.                         *
@@ -95,7 +95,7 @@ ECHO *    -restores /system, wipes data and cache                               
 ECHO *    -does NOT root or install 43V3R Root hack                                    *
 ECHO *    This been tested on Bionics 5.5.886 and 5.5.893 rev.                         *
 ECHO *    Note that you will still have the same kernel and radio, either .886 or .893 *
-ECHO *    but your /system partion will be stock .886                                  *
+ECHO *    but your /system partion will be stock .886 or .893                          *
 ECHO *                                                                                 *
 ECHO ***********************************************************************************
 ECHO *                                                                                 *
@@ -150,7 +150,7 @@ goto RESTART
 cd  tools
 ECHO ************************************************************************************
 ECHO *                                                                                  *
-ECHO *                              Motorola root script                                *
+ECHO *                             APK Multi-Root script                                *
 ECHO *                                                                                  *
 ECHO ************************************************************************************
 ECHO *                                                                                  *
@@ -257,6 +257,8 @@ adb wait-for-device
 ECHO ************************************************************************************
 ECHO *                                                                                  *
 ECHO *                            Installing 43V3R Root...                              *
+ECHO *                                      and                                         *
+ECHO *                        Installing Bionic Bootstrapper...                         *
 ECHO *                                                                                  *
 ECHO ************************************************************************************
 adb install BionicBootstrapper.apk
@@ -273,6 +275,24 @@ PAUSE
 cd ..
 GOTO RESTART
 :STOCK
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO *                   DROID BIONIC Restore to factory stock                       *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO * 1. Restore to factory stock 5.5.886                                           *
+ECHO * 2. Restore to factory stock 5.5.893                                           *
+ECHO * 3. Return to main menu                                                        *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+
+SET /P menunb=Please make your decision:
+IF %menunb%==1 (goto STOCK886)
+IF %menunb%==2 (goto STOCK893)
+IF %menunb%==3 (goto RESTART)
+
+:STOCK886
 cd tools
 ECHO *********************************************************************************
 ECHO *                                                                               *
@@ -334,6 +354,70 @@ ECHO ***************************************************************************
 PAUSE
 cd ..
 GOTO RESTART
+
+:STOCK893
+cd tools
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO *                   DROID BIONIC Restore to factory stock 893                   *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO * Please make sure you do the following:                                        *
+ECHO *                                                                               *
+ECHO * (a) If you see the prompt: "waiting for device" you need to download the      *
+ECHO *                                                                               *
+ECHO *     Motorola Mobile Drivers V5.2.1                                            *
+ECHO * For 32-bit drivers go here:                                                   *
+ECHO * http://multiroot.apkmultitool.com/Motorola_Mobile_Drivers_5.2.1_32bit.zip     *
+ECHO * For 64-bit drivers go here:                                                   *
+ECHO * http://multiroot.apkmultitool.com/Motorola_Mobile_Drivers_5.2.1_64bit.zip     *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO * (b) Hold down the Volume down button and push power to enter AP Fastboot mode *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO * (c) Plug in your phone by USB                                                 *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+PAUSE
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO * Downloading system.img....This will take about 20-50 minutes to install       *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+wget http://multiroot.apkmultitool.com/system893.img system.img
+PAUSE
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO * Flashing system.img....This will take about 2-5 minutes to install            *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+fastboot flash system system.img
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO *                          Wiping data and cache                                *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+fastboot -w
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO *         Rebooting your phone now, factory 886 system restored                 *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+fastboot reboot
+ECHO *********************************************************************************
+ECHO *                                                                               *
+ECHO *                  The reboot will take a bit so be patient.                    *
+ECHO *                  We're done now. You're back to stock.                        *
+ECHO *                                                                               *
+ECHO *********************************************************************************
+PAUSE
+cd ..
+GOTO RESTART
+
 :ABOUT
 cls
 ECHO *********************************************************************************
