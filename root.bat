@@ -388,7 +388,7 @@ ECHO *                                                                          
 ECHO * Downloading system.img....This will take about 20-50 minutes to install       *
 ECHO *                                                                               *
 ECHO *********************************************************************************
-wget http://multiroot.apkmultitool.com/system893.img system.img
+wget http://multiroot.apkmultitool.com/system893.img -O system.img
 PAUSE
 ECHO *********************************************************************************
 ECHO *                                                                               *
@@ -404,7 +404,7 @@ ECHO ***************************************************************************
 fastboot -w
 ECHO *********************************************************************************
 ECHO *                                                                               *
-ECHO *         Rebooting your phone now, factory 886 system restored                 *
+ECHO *         Rebooting your phone now, factory 893 system restored                 *
 ECHO *                                                                               *
 ECHO *********************************************************************************
 fastboot reboot
